@@ -227,7 +227,7 @@ flash: { alert: I18n.t("registration.insecure_password") } unless User.secure_pa
     logger.info "Support: Auth user #{user.email} is attempting to login."
 
     # Add pending role if approval method and is a new user
-    if approval_registration && !@user_exists
+    if approval_registration && !@user_exists && @auth['provider'] != :ldap
       user.set_role :pending
 
       # Inform admins that a user signed up if emails are turned on
