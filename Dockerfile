@@ -56,6 +56,10 @@ RUN apk update \
 
 COPY --from=base $RAILS_ROOT $RAILS_ROOT
 
+# Install custom ca root certificate
+COPY mycerts/*.crt /usr/local/share/ca-certificates
+RUN update-ca-certificates
+
 # Expose port 80.
 EXPOSE 80
 
